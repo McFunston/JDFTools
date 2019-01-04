@@ -128,7 +128,8 @@ namespace JDFTools
             layouts = layoutNode.GetElementsByTagName("Layout");
             foreach (XmlElement layout in layouts)
             {
-                if (layout.GetAttribute("SheetName") != "")
+                
+                if (layout.HasAttribute("SheetName"))
                 {
                     layoutNames.Add(layout.GetAttribute("SheetName"));
                 }
