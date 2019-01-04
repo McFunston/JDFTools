@@ -25,7 +25,7 @@ namespace JDFTools
         }
     }
 
-    public class Box
+    public abstract class Box
     {
         readonly float[] borders = new float[4];
 
@@ -47,38 +47,35 @@ namespace JDFTools
         }
     }
 
-    public class Page
+    public class Page : Box
     {
+        public Page(float[] borders) : base(borders)
+        {
+
+        }
+
         public string Name { get; set; }
-        private float[] trimSize = new float[2];
-        public float Width
-        {
-            get { return trimSize[0] / 72; }
-        }
-        public float Height
-        {
-            get { return trimSize[1] / 72; }
-        }
+
     }
 
-    public class PressSheet
+    public class PressSheet : Box
     {
+        public PressSheet(float[] borders) : base(borders)
+        {
+
+        }
         public List<Page> Pages{ get; set; }
-        private float[] surfaceContentsBox = new float[4];
 
         public string WorkStyle { get; set; }
 
+    }
 
-        public float PlateWidth
+    public class Plate : Box
+    {
+        public Plate(float[] borders) : base(borders)
         {
-            get { return surfaceContentsBox[2] / 72; }
-        }
 
-        public float PlateHeight
-        {
-            get { return surfaceContentsBox[3] / 72; }
         }
-
     }
 
     public class SignaJDF 
