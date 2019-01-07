@@ -1,0 +1,47 @@
+{
+    "P drive Files - Huntclub": {
+        "Source Name": "P drive Files - Huntclub",
+        "Data Type": "Files",
+        "Path": "TestData/Dockets",
+        "Sub Path": "/Production/Print",
+        "Status": "Hunt Club-Files In"
+    },
+    "P drive Files - St Laurent": {
+        "Source Name": "P drive Files - St Laurent",
+        "Data Type": "Files",
+        "Path": "/Volumes/Dockets",
+        "Sub Path": "/Production/Print",
+        "Status": "Dollco Printing-Files In"
+    },
+    "Insite Files - Huntclub": {
+        "Source Name": "Insite Files - Huntclub",
+        "Data Type": "Files",
+        "Path": "/Volumes/AraxiVolume_PRINERGYEPM_J/Jobs",
+        "Sub Path": "/System/SubPages",
+        "Status": "Hunt Club-Files In"
+    },
+    "PDF Proof Out - Huntclub": {
+        "Source Name": "PDF Proof Out - Huntclub",
+        "Data Type": "CSV Log File",
+        "Path": "TestData/PDF-ProofLog.csv",
+        "Status": "Hunt Club-Proof Out"
+    },
+    "PDF Proof Out - St Laurent": {
+        "Source Name": "PDF Proof Out - St Laurent",
+        "Data Type": "CSV Log File",
+        "Path": "PDF-ProofLog.csv",
+        "Status": "Dollco Printing-Proof Out"
+    },
+    "Xerox Proof Out - St Laurent": {
+        "Source Name": "Xerox Proof Out - St Laurent",
+        "Data Type": "CSV Log File",
+        "Path": "TestData/Xerox-ProofLog.csv",
+        "Status": "Dollco Printing-Proof Out"
+    },
+    "Xerox Proof Out - Huntclub": {
+        "Source Name": "Xerox Proof Out - Huntclub",
+        "Data Type": "CSV Log File",
+        "Path": "Xerox-ProofLog.csv",
+        "Status": "Hunt Club-Proof Out"
+    }
+}
