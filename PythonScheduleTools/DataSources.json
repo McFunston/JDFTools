@@ -1,0 +1,34 @@
+{
+    "P drive Files": {
+        "Source Name": "P drive Files",
+        "Data Type": "Files",
+        "Path": "/Volumes/Dockets",
+        "Sub Path": "/Production/Print",
+        "Status": "Files In"
+    },
+    "Insite Files": {
+        "Source Name": "Insite Files",
+        "Data Type": "Files",
+        "Path": "/Volumes/AraxiVolume_PRINERGYEPM_J/Jobs",
+        "Sub Path": "/System/SubPages",
+        "Status": "Files In"
+    },
+    "PDF Proof Out": {
+        "Source Name": "PDF Proof Out",
+        "Data Type": "CSV Log File",
+        "Path": "PDF-ProofLog.csv",
+        "Status": "Proof Out"
+    },
+    "Xerox Proof Out": {
+        "Source Name": "Xerox Proof Out",
+        "Data Type": "CSV Log File",
+        "Path": "Xerox-ProofLog.csv",
+        "Status": "Proof Out"
+    },
+    "Dollco Plates Folder": {
+        "Source Name": "Dollco Plates Folder",
+        "Data Type": "Folder",
+        "Path": "/unknown",
+        "Status": "Proof In"
+    }
+}
