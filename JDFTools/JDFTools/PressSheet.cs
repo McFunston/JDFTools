@@ -9,6 +9,21 @@ namespace JDFTools
 
         }
         public List<Page> Pages{ get; set; }
+        private Plate[] plates;
+
+        public Plate[] Plates
+        {
+            get { return plates; }
+            set
+            {
+                if (plates == null)
+                {
+                    plates = new Plate[2];
+                }
+                plates = value;
+            }
+        }
+
 
         public string WorkStyle { get; set; }
 
