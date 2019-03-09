@@ -8,4 +8,10 @@
   <ItemGroup>
     <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="data.jdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

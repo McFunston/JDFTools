@@ -4,9 +4,11 @@ using System.Text;
 
 namespace JDFTools
 {
+    enum BindingStyleType { PerfectBound, SaddleStitch, Loose}
     class ProductPart
     {
         public string Name { get; set; }
-        public List<PressSheet> MyProperty { get; set; }
+        public BindingStyleType BindingStyle { get; set; }
+        public List<PressSheet> PressSheets { get; set; }
     }
 }
