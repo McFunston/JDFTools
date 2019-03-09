@@ -25,59 +25,6 @@ namespace JDFTools
         }
     }
 
-    public abstract class Box
-    {
-        readonly float[] borders = new float[4];
-
-        public Box(float[] borders)
-        {
-            if (borders.Length==4)
-            {
-                this.borders = borders;
-            }
-        }
-
-        public float Height
-        {
-            get { return (borders[2]-borders[0])/72; }
-        }
-        public float Width
-        {
-            get { return (borders[3] - borders[1])/72; }
-        }
-    }
-
-    public class Page : Box
-    {
-        public Page(float[] borders) : base(borders)
-        {
-
-        }
-
-        public string Name { get; set; }
-
-    }
-
-    public class PressSheet : Box
-    {
-        public PressSheet(float[] borders) : base(borders)
-        {
-
-        }
-        public List<Page> Pages{ get; set; }
-
-        public string WorkStyle { get; set; }
-
-    }
-
-    public class Plate : Box
-    {
-        public Plate(float[] borders) : base(borders)
-        {
-
-        }
-    }
-
     public class SignaJDF 
     {
         public SignaJDF(XmlDocument xmlDocument)
@@ -145,8 +92,12 @@ namespace JDFTools
             XmlDocument xml = new XmlDocument();
             xml.Load("data.jdf");
             var jDF = new SignaJDF(xml);
-            List<string> layouts = jDF.GetLayoutNames();
-            Console.WriteLine(jDF.GetJobParts());
+            List<string> jobParts = jDF.GetLayoutNames();
+            foreach (string part in jobParts)
+            {
+                Console.WriteLine(part);
+            }
+            
             Console.ReadKey();
         }
     }
