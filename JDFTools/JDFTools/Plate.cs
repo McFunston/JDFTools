@@ -6,5 +6,6 @@
         {
 
         }
+        public string Press { get; set; }
     }
 }
