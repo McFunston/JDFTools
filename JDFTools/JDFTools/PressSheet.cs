@@ -8,6 +8,8 @@ namespace JDFTools
         {
 
         }
+        public string Name { get; set; }
+        public string Press { get; set; }
         public List<Page> Pages{ get; set; }
         private Plate plates;
 
