@@ -10,5 +10,11 @@ namespace JDFTools
         public string Name { get; set; }
         public BindingStyleType BindingStyle { get; set; }
         public List<PressSheet> PressSheets { get; set; }
+        public List<string> Versions { get; set; }
+        public int VersionCount
+            {
+            get { return Versions.Count; }
+            }
+
     }
 }
