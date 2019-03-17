@@ -18,11 +18,16 @@ namespace JDFTools
             get { return sourceXML.DocumentElement.Attributes["JobID"].Value; }
         }
 
+        public XmlElement ResourcePool => (XmlElement)sourceXML.GetElementsByTagName("ResourcePool")[0];
+
+        public XmlElement Layout => (XmlElement)ResourcePool.GetElementsByTagName("Layout")[0];
+
+        public XmlNodeList Layouts => sourceXML.GetElementsByTagName("Layout");
+
         public List<String> GetJobParts()
         {
             List<String> jobPartList = new List<string>();
-            XmlNode layout = getLayoutNode();
-            XmlNode jobParts = XMLTools.FindNode(layout.ChildNodes, "SignaJob");
+            XmlNode jobParts = XMLTools.FindNode(Layout.ChildNodes, "SignaJob");
             foreach (XmlNode jobPart in jobParts)
             {
                 jobPartList.Add(jobPart.Attributes.GetNamedItem("Name").Value);
@@ -32,24 +37,15 @@ namespace JDFTools
 
         private XmlNode getResourcePool() //Get the JDF file's ResourcePool Node
         {
-            XmlNode resourcePool = XMLTools.FindNode(sourceXML.ChildNodes, "ResourcePool");
-            return resourcePool;
-        }
-
-        private XmlNode getLayoutNode()
-        {
-            XmlNode resourcePool = getResourcePool();
-            XmlNode layout = XMLTools.FindNode(resourcePool.ChildNodes, "Layout");
-            return layout;
+            XmlNodeList resourcePool = sourceXML.GetElementsByTagName("ResourcePool");
+            return resourcePool[0];
         }
 
         public List<string> GetLayoutNames()
         {
             List<string> layoutNames = new List<string>();
-            XmlNodeList layouts;
-            XmlElement layoutNode = (XmlElement)getLayoutNode();
-            layouts = layoutNode.GetElementsByTagName("Layout");
-            foreach (XmlElement layout in layouts)
+            
+            foreach (XmlElement layout in Layouts)
             {
                 
                 if (layout.HasAttribute("SheetName"))

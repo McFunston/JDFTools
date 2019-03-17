@@ -33,7 +33,7 @@ namespace JDFTools
             XmlDocument xml = new XmlDocument();
             xml.Load("data.jdf");
             var jDF = new SignaJDF(xml);
-            List<string> jobParts = jDF.GetLayoutNames();
+            List<string> jobParts = jDF.GetJobParts();
             foreach (string part in jobParts)
             {
                 Console.WriteLine(part);
