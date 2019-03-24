@@ -11,5 +11,6 @@ namespace JDFTools.Models
         public bool Versioned { get; set; }
         public string SignaVersion { get; set; }
         public List<ProductPart> ProductParts { get; set; }
+        public DateTime CreationTime { get; set; }
     }
 }
