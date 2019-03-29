@@ -1,0 +1,54 @@
+{
+  "Presses": [
+    {
+      "Name": "Heidelberg 105 XL",
+      "Perfecting": "True",
+      "Type": "Sheetfed",
+      "Plate Width": "2990.5511811",
+      "Plate Height": "2298.8976378"
+    },
+    {
+      "Name": "Heidelberg Speedmaster CD 102",
+      "Perfecting": "False",
+      "Type": "Sheetfed",
+      "Plate Width": "2919.685032",
+      "Plate Height": "2239.370064"
+    },
+    {
+      "Name": "40 Inch",
+      "Perfecting": "True",
+      "Type": "Sheetfed",
+      "Plate Width": "2916",
+      "Plate Height": "2916"
+    },
+    {
+      "Name": "Printmaster PM46",
+      "Perfecting": "True",
+      "Type": "Sheetfed",
+      "Plate Width": "963",
+      "Plate Height": "1431"
+    },
+    {
+      "Name": "Superjet",
+      "Perfecting": "False",
+      "Type": "Sheetfed",
+      "Plate Width": "882",
+      "Plate Height": "1404"
+    },
+    {
+      "Name": "Man Roland Rotoman",
+      "Perfecting": "False",
+      "Type": "Web",
+      "Plate Width": "2763.77952756",
+      "Plate Height": "1734.80314961"
+    },
+    {
+      "Name": "Goss M600",
+      "Perfecting": "False",
+      "Type": "Web",
+      "Plate Width": "2743.93700787",
+      "Plate Height": "1712.12598425"
+    }
+  ]
+
+}
