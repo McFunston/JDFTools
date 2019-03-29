@@ -52,10 +52,11 @@ namespace JDFTools
         public XmlElement Layout => (XmlElement)ResourcePool.
             SelectSingleNode("default:Layout", NameSpaceManager);
 
-        public XmlNodeList Layouts => sourceXML.GetElementsByTagName("Layout");
-
         public XmlNodeList Signatures => Layout.
             SelectNodes("//default:Layout[@SignatureName]", NameSpaceManager);
+
+        public XmlNodeList LayerList => Layout.
+            SelectNodes("//default:LayerList", NameSpaceManager);
 
         public XmlNodeList PressSheets => Layout.
             SelectNodes("//default:Layout[@SheetName]", NameSpaceManager);
@@ -63,34 +64,42 @@ namespace JDFTools
         public XmlNodeList Pages => Layout.
             SelectNodes("//default:ContentObject", NameSpaceManager);
 
+        public XmlNodeList JobParts => Layout.
+            SelectNodes("//default:SignaJobPart", NameSpaceManager);
+
+        public XmlNode Created => Layout.
+            SelectSingleNode("//default:AuditPool/default:Created", NameSpaceManager);
+
+        public XmlNode GenContext => Layout.
+            SelectSingleNode("//default:SignaGenContext", NameSpaceManager);
 
         public List<String> GetJobParts()
         {
-            var sigs = Signatures;
+            
             List<String> jobPartList = new List<string>();
-            XmlNode jobParts = ResourcePool.SelectSingleNode("//default:SignaJob", NameSpaceManager);
-            foreach (XmlNode jobPart in jobParts)
-            {
-                jobPartList.Add(jobPart.Attributes.GetNamedItem("Name").Value);
-            }
+            //XmlNode jobParts = ResourcePool.SelectSingleNode("//default:SignaJob", NameSpaceManager);
+            //foreach (XmlNode jobPart in jobParts)
+            //{
+            //    jobPartList.Add(jobPart.Attributes.GetNamedItem("Name").Value);
+            //}
             return jobPartList;
         }
 
-        public List<string> GetLayoutNames()
-        {
-            List<string> layoutNames = new List<string>();
+        //public List<string> GetLayoutNames()
+        //{
+        //    List<string> layoutNames = new List<string>();
             
-            foreach (XmlElement layout in Layouts)
-            {
+        //    foreach (XmlElement layout in Layouts)
+        //    {
                 
-                if (layout.HasAttribute("SheetName"))
-                {
-                    layoutNames.Add(layout.GetAttribute("SheetName"));
-                }
+        //        if (layout.HasAttribute("SheetName"))
+        //        {
+        //            layoutNames.Add(layout.GetAttribute("SheetName"));
+        //        }
                 
-            }
-            return layoutNames;
-        }
+        //    }
+        //    return layoutNames;
+        //}
 
     }
 }
