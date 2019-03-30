@@ -10,7 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="data.jdf">
+    <None Update="TestData\data-Versioned.jdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\data.jdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

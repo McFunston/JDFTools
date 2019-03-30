@@ -32,7 +32,7 @@ namespace JDFTools
         static void Main(string[] args)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load("data.jdf");
+            xml.Load("TestData/data.jdf");
 
             var jDF = new SignaJDF(xml);
             List<string> jobParts = jDF.GetJobParts();
