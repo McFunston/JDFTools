@@ -7,6 +7,21 @@ namespace JDFTools
 {
     public class SignaPage
     {
+        public SignaPage(XmlNode contentObject)
+        {
+            DescriptiveName = contentObject.Attributes["DescriptiveName"].Value;
+            string[] fpb = contentObject.Attributes["FinalPageBox"].Value.Split(" ");
+            FinalPageBox[0] = float.Parse(fpb[0]);
+            FinalPageBox[1] = float.Parse(fpb[1]);
+            FinalPageBox[2] = float.Parse(fpb[2]);
+            FinalPageBox[3] = float.Parse(fpb[3]);
+            Signature = contentObject.ParentNode.ParentNode.Attributes["Name"].Value;
+            JobPart = contentObject.Attributes["JobPart"].Value;
+            Side = contentObject.Attributes["AssemblyFB"].Value;
+            Orientation = int.Parse(contentObject.Attributes["PageOrientation"].Value);
+            Order = int.Parse(contentObject.Attributes["Ord"].Value);
+        }
+
         public string DescriptiveName { get; set; }
         public float[] FinalPageBox { get; set; }
         public string JobPart { get; set; }
@@ -33,6 +48,7 @@ namespace JDFTools
             sourceXML = xmlDocument;
             NameSpaceManager = new XmlNamespaceManager(sourceXML.NameTable);
             NameSpaceManager.AddNamespace("default", "http://www.CIP4.org/JDFSchema_1_1");
+            NameSpaceManager.AddNamespace("HDM", "www.heidelberg.com/schema/HDM");
         }
 
         public XmlNamespaceManager NameSpaceManager { get; set; }
@@ -45,6 +61,11 @@ namespace JDFTools
         XmlDocument sourceXML;
 
         public string JobID => sourceXML.DocumentElement.Attributes["JobID"].Value;
+        public string DescriptiveName => sourceXML.DocumentElement.Attributes["DescriptiveName"].Value;
+        public string Creator => GenContext.Attributes["OS_User"].Value;
+        public string Client => ClientInfo.Attributes["CustomerID"].Value;
+        public string Version => GenContext.Attributes["ProductMajorVersion"].Value;
+        public string CreationTime => Blob.Attributes["TimeStamp"].Value;
 
         public XmlElement ResourcePool => (XmlElement)sourceXML.
             SelectSingleNode("//default:ResourcePool", NameSpaceManager);
@@ -71,11 +92,20 @@ namespace JDFTools
             SelectSingleNode("//default:AuditPool/default:Created", NameSpaceManager);
 
         public XmlNode GenContext => Layout.
-            SelectSingleNode("//default:SignaGenContext", NameSpaceManager);
+            SelectSingleNode("//default:SignaGenContext",NameSpaceManager);
+
+        public XmlNode ClientInfo => ResourcePool.
+            SelectSingleNode("//default:CustomerInfo", NameSpaceManager);
+
+        public XmlNode Blob => Layout.
+            SelectSingleNode("default:SignaBLOB", NameSpaceManager);
+
+        public XmlNodeList ContentObjects => Layout.
+            SelectNodes("//default:ContentObject");
 
         public List<String> GetJobParts()
         {
-            
+            var sb = Blob;            
             List<String> jobPartList = new List<string>();
             //XmlNode jobParts = ResourcePool.SelectSingleNode("//default:SignaJob", NameSpaceManager);
             //foreach (XmlNode jobPart in jobParts)

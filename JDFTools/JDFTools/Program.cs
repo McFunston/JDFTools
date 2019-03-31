@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JDFTools.Models;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.XPath;
@@ -35,12 +36,8 @@ namespace JDFTools
             xml.Load("TestData/data.jdf");
 
             var jDF = new SignaJDF(xml);
-            List<string> jobParts = jDF.GetJobParts();
-            foreach (string part in jobParts)
-            {
-                Console.WriteLine(part);
-            }
-            
+            var imposition = new SignaImposition(jDF);
+            imposition.GetBasicData();
             Console.ReadKey();
         }
     }
