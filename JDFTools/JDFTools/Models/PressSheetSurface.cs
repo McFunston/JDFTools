@@ -2,14 +2,15 @@
 
 namespace JDFTools
 {
-    public class PressSheet : Box
+    public class PressSheetSurface : Box
     {
-        public PressSheet(float[] borders) : base(borders)
+        public PressSheetSurface(float[] borders) : base(borders)
         {
 
         }
         public string Name { get; set; }
         public string Press { get; set; }
+        public string Side { get; set; }
         public List<Page> Pages{ get; set; }
         private Plate plates;
 

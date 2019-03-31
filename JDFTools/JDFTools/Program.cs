@@ -36,6 +36,7 @@ namespace JDFTools
             xml.Load("TestData/data.jdf");
 
             var jDF = new SignaJDF(xml);
+            jDF.GetPages();
             var imposition = new SignaImposition(jDF);
             imposition.GetBasicData();
             Console.ReadKey();

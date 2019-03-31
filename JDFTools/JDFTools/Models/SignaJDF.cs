@@ -10,15 +10,16 @@ namespace JDFTools
         public SignaPage(XmlNode contentObject)
         {
             DescriptiveName = contentObject.Attributes["DescriptiveName"].Value;
-            string[] fpb = contentObject.Attributes["FinalPageBox"].Value.Split(" ");
+            string[] fpb = contentObject.Attributes["HDM:FinalPageBox"].Value.Split(" ");
+            float[] FinalPageBox = new float[4];
             FinalPageBox[0] = float.Parse(fpb[0]);
             FinalPageBox[1] = float.Parse(fpb[1]);
             FinalPageBox[2] = float.Parse(fpb[2]);
             FinalPageBox[3] = float.Parse(fpb[3]);
             Signature = contentObject.ParentNode.ParentNode.Attributes["Name"].Value;
-            JobPart = contentObject.Attributes["JobPart"].Value;
-            Side = contentObject.Attributes["AssemblyFB"].Value;
-            Orientation = int.Parse(contentObject.Attributes["PageOrientation"].Value);
+            JobPart = contentObject.Attributes["HDM:JobPart"].Value;
+            Side = contentObject.Attributes["HDM:AssemblyFB"].Value;
+            Orientation = int.Parse(contentObject.Attributes["HDM:PageOrientation"].Value);
             Order = int.Parse(contentObject.Attributes["Ord"].Value);
         }
 
@@ -53,7 +54,7 @@ namespace JDFTools
 
         public XmlNamespaceManager NameSpaceManager { get; set; }
 
-        private void GetPages()
+        public void GetPages()
         {
             SignaPages = new List<SignaPage>();
             foreach (XmlNode contentObject in ContentObjects)
@@ -108,7 +109,7 @@ namespace JDFTools
             SelectSingleNode("default:SignaBLOB", NameSpaceManager);
 
         public XmlNodeList ContentObjects => Layout.
-            SelectNodes("//default:ContentObject");
+            SelectNodes("//default:ContentObject", NameSpaceManager);
 
         public List<String> GetJobParts()
         {
