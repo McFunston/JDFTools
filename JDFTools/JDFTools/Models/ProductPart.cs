@@ -9,7 +9,7 @@ namespace JDFTools
     {
         public string Name { get; set; }
         public BindingStyleType BindingStyle { get; set; }
-        public List<PressSheetSurface> PressSheets { get; set; }
+        public List<PressSheetSurface> PressSheetSurfaces { get; set; }
         public List<string> Versions { get; set; }
         public int VersionCount
             {

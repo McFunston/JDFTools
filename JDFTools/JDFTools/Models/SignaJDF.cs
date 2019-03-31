@@ -36,7 +36,7 @@ namespace JDFTools
     {
         public string Name { get; set; }
     }
-    public class SignaSheet
+    public class SignaSheetSurface
     {
         public string Name { get; set; }
 
