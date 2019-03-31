@@ -55,11 +55,18 @@ namespace JDFTools
 
         private void GetPages()
         {
+            SignaPages = new List<SignaPage>();
+            foreach (XmlNode contentObject in ContentObjects)
+            {
+                SignaPage signaPage = new SignaPage(contentObject);
+                SignaPages.Add(signaPage);
+            }
+
 
         }
 
         XmlDocument sourceXML;
-
+        public List<SignaPage> SignaPages { get; set; }
         public string JobID => sourceXML.DocumentElement.Attributes["JobID"].Value;
         public string DescriptiveName => sourceXML.DocumentElement.Attributes["DescriptiveName"].Value;
         public string Creator => GenContext.Attributes["OS_User"].Value;
