@@ -39,6 +39,7 @@ namespace JDFTools
             jDF.GetPages();
             var imposition = new SignaImposition(jDF);
             imposition.GetBasicData();
+            var PressList = new EquipmentList();
             Console.ReadKey();
         }
     }

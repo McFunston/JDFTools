@@ -6,10 +6,16 @@ using System.Text;
 
 namespace JDFTools.Models
 {
-    class Equipment
+
+    public class Equipment
+    {
+        public Press[] Presses { get; set; }
+    }
+
+    public class Press
     {
         public string Name { get; set; }
-        public bool Perfecting { get; set; }
+        public string Perfecting { get; set; }
         public string Type { get; set; }
         public float PlateWidth { get; set; }
         public float PlateHeight { get; set; }
@@ -22,11 +28,11 @@ namespace JDFTools.Models
             using (StreamReader r = new StreamReader("Equipment.json"))
             {
                 var json = r.ReadToEnd();
-                PrintingPresses = JsonConvert.DeserializeObject<List<Equipment>>(json);
+                PrintingPresses = JsonConvert.DeserializeObject<List<Press>>(json);
             }
         }
 
-        public List<Equipment> PrintingPresses { get; set; }
+        public List<Press> PrintingPresses { get; set; }
     }
 
 }
