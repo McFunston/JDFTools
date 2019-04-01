@@ -33,6 +33,20 @@ namespace JDFTools.Models
         }
 
         public List<Press> PrintingPresses { get; set; }
+
+        public string PressDetector(float PlateWidth, float PlateHeight)
+        {
+            string pressName = "Unknown";
+            foreach (Press press in PrintingPresses)
+            {
+                if (press.PlateHeight == PlateHeight && press.PlateWidth == PlateWidth)
+                {
+                    pressName = press.Name;
+                }
+            }
+
+            return pressName;
+        }
     }
 
 }
