@@ -36,7 +36,9 @@ namespace JDFTools
             xml.Load("TestData/data.jdf");
 
             var jDF = new SignaJDF(xml);
+            var test = jDF.Sides;
             jDF.GetPages();
+            jDF.GetSides();
             var imposition = new SignaImposition(jDF);
             imposition.GetBasicData();
             var PressList = new EquipmentList();

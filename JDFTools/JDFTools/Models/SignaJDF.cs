@@ -5,9 +5,9 @@ using System.Xml.Linq;
 
 namespace JDFTools
 {
-    public class SignaPage
+    public static class AttributeTools
     {
-        public float[] SplitBox(string box)
+        public static float[] SplitBox(string box)
         {
             float[] splitBox = new float[4];
             string[] boxArray = box.Split(" ");
@@ -18,11 +18,15 @@ namespace JDFTools
             splitBox[3] = float.Parse(boxArray[3]);
             return splitBox;
         }
+    }
+    public class SignaPage
+    {
+
         public SignaPage(XmlNode contentObject)
         {
             DescriptiveName = contentObject.Attributes["DescriptiveName"].Value;
             string fpb = contentObject.Attributes["HDM:FinalPageBox"].Value;
-            float[] FinalPageBox = SplitBox(fpb);
+            float[] FinalPageBox = AttributeTools.SplitBox(fpb);
             Signature = contentObject.ParentNode.ParentNode.Attributes["Name"].Value;
             JobPart = contentObject.Attributes["HDM:JobPart"].Value;
             Side = contentObject.Attributes["HDM:AssemblyFB"].Value;
@@ -43,12 +47,30 @@ namespace JDFTools
     {
         public string Name { get; set; }
     }
-    public class SignaPlateSurface
+    public class SignaSide
     {
+        public SignaSide(XmlNode xmlNode, List<SignaPage> signaPages)
+        {
+            Name = xmlNode.Attributes["Side"].Value;
+            Signature = xmlNode.ParentNode.Attributes["Name"].Value;
+            SheetBox = AttributeTools.SplitBox(xmlNode.Attributes["HDM:PaperRect"].Value);
+            PlateBox = AttributeTools.SplitBox(xmlNode.
+                ParentNode.Attributes["SurfaceContentsBox"].Value);
+            Pages = new List<SignaPage>();
+            foreach (var page in signaPages)
+            {
+                if (page.Signature == Signature && page.Side == Name)
+                {
+                    Pages.Add(page);
+                }
+            }
+        }
+
         public string Name { get; set; }
+        public string Signature { get; set; }
         public float[] PlateBox { get; set; }
         public float[] SheetBox { get; set; }
-
+        public List<SignaPage> Pages { get; set; }
     }
 
     public class SignaJDF 
@@ -71,12 +93,24 @@ namespace JDFTools
                 SignaPage signaPage = new SignaPage(contentObject);
                 SignaPages.Add(signaPage);
             }
+            
 
+        }
 
+        public void GetSides()
+        {
+            if (SignaPages == null) { this.GetPages};
+            SignaSides = new List<SignaSide>();
+            foreach (XmlNode side in Sides)
+            {
+                SignaSide signaSide = new SignaSide(side, SignaPages);
+                SignaSides.Add(signaSide);
+            }
         }
 
         XmlDocument sourceXML;
         public List<SignaPage> SignaPages { get; set; }
+        public List<SignaSide> SignaSides { get; set; }
         public string JobID => sourceXML.DocumentElement.Attributes["JobID"].Value;
         public string DescriptiveName => sourceXML.DocumentElement.Attributes["DescriptiveName"].Value;
         public string Creator => GenContext.Attributes["OS_User"].Value;
@@ -98,6 +132,9 @@ namespace JDFTools
 
         public XmlNodeList PressSheets => Layout.
             SelectNodes("//default:Layout[@SheetName]", NameSpaceManager);
+
+        public XmlNodeList Sides => Layout.
+            SelectNodes("//default:Layout[@Side]", NameSpaceManager);
 
         public XmlNodeList Pages => Layout.
             SelectNodes("//default:ContentObject", NameSpaceManager);
