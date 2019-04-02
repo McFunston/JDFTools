@@ -7,15 +7,22 @@ namespace JDFTools
 {
     public class SignaPage
     {
+        public float[] SplitBox(string box)
+        {
+            float[] splitBox = new float[4];
+            string[] boxArray = box.Split(" ");
+
+            splitBox[0] = float.Parse(boxArray[0]);
+            splitBox[1] = float.Parse(boxArray[1]);
+            splitBox[2] = float.Parse(boxArray[2]);
+            splitBox[3] = float.Parse(boxArray[3]);
+            return splitBox;
+        }
         public SignaPage(XmlNode contentObject)
         {
             DescriptiveName = contentObject.Attributes["DescriptiveName"].Value;
-            string[] fpb = contentObject.Attributes["HDM:FinalPageBox"].Value.Split(" ");
-            float[] FinalPageBox = new float[4];
-            FinalPageBox[0] = float.Parse(fpb[0]);
-            FinalPageBox[1] = float.Parse(fpb[1]);
-            FinalPageBox[2] = float.Parse(fpb[2]);
-            FinalPageBox[3] = float.Parse(fpb[3]);
+            string fpb = contentObject.Attributes["HDM:FinalPageBox"].Value;
+            float[] FinalPageBox = SplitBox(fpb);
             Signature = contentObject.ParentNode.ParentNode.Attributes["Name"].Value;
             JobPart = contentObject.Attributes["HDM:JobPart"].Value;
             Side = contentObject.Attributes["HDM:AssemblyFB"].Value;
@@ -36,9 +43,11 @@ namespace JDFTools
     {
         public string Name { get; set; }
     }
-    public class SignaSheetSurface
+    public class SignaPlateSurface
     {
         public string Name { get; set; }
+        public float[] PlateBox { get; set; }
+        public float[] SheetBox { get; set; }
 
     }
 
