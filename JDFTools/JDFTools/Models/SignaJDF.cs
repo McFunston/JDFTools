@@ -46,6 +46,16 @@ namespace JDFTools
     public class SignaSignature
     {
         public string Name { get; set; }
+        public string DescriptiveName { get; set; }
+        public string WorkStyle { get; set; }
+
+        public List<SignaSide> SignaSides { get; set; }
+        public List<SignaPage> SignaPages { get; set; }
+
+        public float[] PlateBox => SignaSides[0].PlateBox;
+        public float[] SheetBox => SignaSides[0].SheetBox;
+
+
     }
     public class SignaSide
     {
@@ -99,7 +109,7 @@ namespace JDFTools
 
         public void GetSides()
         {
-            if (SignaPages == null) { this.GetPages};
+            if (SignaPages == null) { this.GetPages(); };
             SignaSides = new List<SignaSide>();
             foreach (XmlNode side in Sides)
             {
