@@ -26,7 +26,7 @@ namespace JDFTools
         {
             DescriptiveName = contentObject.Attributes["DescriptiveName"].Value;
             string fpb = contentObject.Attributes["HDM:FinalPageBox"].Value;
-            float[] FinalPageBox = AttributeTools.SplitBox(fpb);
+            FinalPageBox = AttributeTools.SplitBox(fpb);
             Signature = contentObject.ParentNode.ParentNode.Attributes["Name"].Value;
             JobPart = contentObject.Attributes["HDM:JobPart"].Value;
             Side = contentObject.Attributes["HDM:AssemblyFB"].Value;
@@ -55,7 +55,23 @@ namespace JDFTools
         public float[] PlateBox => SignaSides[0].PlateBox;
         public float[] SheetBox => SignaSides[0].SheetBox;
 
+        public SignaSignature(XmlNode signature, List<SignaSide> signaSides, List<SignaPage> signaPages)
+        {
+            Name = signature.Attributes["Name"].Value;
+            DescriptiveName = signature.Attributes["DescriptiveName"].Value;
+            WorkStyle = signature.Attributes["SourceWorkStyle"].Value;
+            SignaSides = new List<SignaSide>();
+            SignaPages = new List<SignaPage>();
+            foreach (SignaSide signaSide in signaSides)
+            {
+                if (signaSide.Signature == Name)
+                {
+                    SignaSides.Add(signaSide);
+                    SignaPages.AddRange(signaSide.Pages);
+                }
+            }
 
+        }
     }
     public class SignaSide
     {
@@ -83,7 +99,7 @@ namespace JDFTools
         public List<SignaPage> Pages { get; set; }
     }
 
-    public class SignaJDF 
+    public class SignaJDF
     {
         public SignaJDF(XmlDocument xmlDocument)
         {
@@ -103,7 +119,7 @@ namespace JDFTools
                 SignaPage signaPage = new SignaPage(contentObject);
                 SignaPages.Add(signaPage);
             }
-            
+
 
         }
 
@@ -118,9 +134,22 @@ namespace JDFTools
             }
         }
 
+        public void GetSignatures()
+        {
+            if (SignaSides == null) { this.GetSides(); }
+            SignaSignatures = new List<SignaSignature>();
+            foreach (XmlNode signature in PressSheets)
+            {
+                SignaSignature signaSignature = new SignaSignature(signature, SignaSides, SignaPages);
+                SignaSignatures.Add(signaSignature);
+            }
+
+        }
+
         XmlDocument sourceXML;
         public List<SignaPage> SignaPages { get; set; }
         public List<SignaSide> SignaSides { get; set; }
+        public List<SignaSignature> SignaSignatures { get; set; }
         public string JobID => sourceXML.DocumentElement.Attributes["JobID"].Value;
         public string DescriptiveName => sourceXML.DocumentElement.Attributes["DescriptiveName"].Value;
         public string Creator => GenContext.Attributes["OS_User"].Value;
@@ -156,7 +185,7 @@ namespace JDFTools
             SelectSingleNode("//default:AuditPool/default:Created", NameSpaceManager);
 
         public XmlNode GenContext => Layout.
-            SelectSingleNode("//default:SignaGenContext",NameSpaceManager);
+            SelectSingleNode("//default:SignaGenContext", NameSpaceManager);
 
         public XmlNode ClientInfo => ResourcePool.
             SelectSingleNode("//default:CustomerInfo", NameSpaceManager);
@@ -169,7 +198,7 @@ namespace JDFTools
 
         public List<String> GetJobParts()
         {
-            var sb = Blob;            
+            var sb = Blob;
             List<String> jobPartList = new List<string>();
             //XmlNode jobParts = ResourcePool.SelectSingleNode("//default:SignaJob", NameSpaceManager);
             //foreach (XmlNode jobPart in jobParts)
@@ -182,15 +211,15 @@ namespace JDFTools
         //public List<string> GetLayoutNames()
         //{
         //    List<string> layoutNames = new List<string>();
-            
+
         //    foreach (XmlElement layout in Layouts)
         //    {
-                
+
         //        if (layout.HasAttribute("SheetName"))
         //        {
         //            layoutNames.Add(layout.GetAttribute("SheetName"));
         //        }
-                
+
         //    }
         //    return layoutNames;
         //}
