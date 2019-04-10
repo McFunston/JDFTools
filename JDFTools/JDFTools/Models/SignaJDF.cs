@@ -109,6 +109,16 @@ namespace JDFTools
             NameSpaceManager.AddNamespace("HDM", "www.heidelberg.com/schema/HDM");
         }
 
+        public SignaJDF(string jdfPath)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load(jdfPath);
+            sourceXML = xml;
+            NameSpaceManager = new XmlNamespaceManager(sourceXML.NameTable);
+            NameSpaceManager.AddNamespace("default", "http://www.CIP4.org/JDFSchema_1_1");
+            NameSpaceManager.AddNamespace("HDM", "www.heidelberg.com/schema/HDM");
+        }
+
         public XmlNamespaceManager NameSpaceManager { get; set; }
 
         public void GetPages()

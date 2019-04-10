@@ -33,9 +33,9 @@ namespace JDFTools
         static void Main(string[] args)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load("TestData/data.jdf");
+            //xml.Load("TestData/data.jdf");
 
-            var jDF = new SignaJDF(xml);
+            var jDF = new SignaJDF("TestData/data.jdf");
             var test = jDF.Sides;
             
             jDF.GetSignatures();
