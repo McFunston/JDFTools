@@ -195,13 +195,13 @@ namespace JDFTools
             SelectSingleNode("//default:AuditPool/default:Created", NameSpaceManager);
 
         public XmlNode GenContext => Layout.
-            SelectSingleNode("//default:SignaGenContext", NameSpaceManager);
+            SelectSingleNode("//*[local-name()='SignaGenContext']", NameSpaceManager);
 
         public XmlNode ClientInfo => ResourcePool.
             SelectSingleNode("//default:CustomerInfo", NameSpaceManager);
 
         public XmlNode Blob => Layout.
-            SelectSingleNode("default:SignaBLOB", NameSpaceManager);
+            SelectSingleNode("//*[local-name()='SignaBLOB']", NameSpaceManager);
 
         public XmlNodeList ContentObjects => Layout.
             SelectNodes("//default:ContentObject", NameSpaceManager);
