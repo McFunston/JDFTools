@@ -49,5 +49,17 @@ namespace JDFToolsTests
             Assert.IsNotNull(blob1);
             Assert.IsNotNull(blob2);
         }
+        [TestMethod]
+        public void GenContextTest()
+        {
+            //Arrange
+            TestSetup();
+            //Act
+            var genContext1 = TestJDF.GenContext;
+            var genContext2 = VersionedJDF.GenContext;
+            //Assert
+            Assert.IsNotNull(genContext1);
+            Assert.IsNotNull(genContext2);
+        }
     }
 }
